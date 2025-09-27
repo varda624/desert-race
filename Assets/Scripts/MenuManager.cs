@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class MenuManager : MonoBehaviour
@@ -13,6 +12,7 @@ public class MenuManager : MonoBehaviour
     public GameObject SettingsPanel;
     public Slider MusicSlider;
     public TMP_Text VolumePercentText;
+    public MenuAnimations MenuAnimations;
 
     private AudioSource _audioSource;
     private static float _volumeScale = 0.5f;
@@ -41,7 +41,7 @@ public class MenuManager : MonoBehaviour
 
     private void StartGame()
     {
-        SceneManager.LoadScene(1);
+        MenuAnimations.ActivateFadePanel();
     }
 
     private void ExitGame()
@@ -52,11 +52,12 @@ public class MenuManager : MonoBehaviour
     private void OpenSettingsPanel()
     {
         SettingsPanel.SetActive(true);
+        MenuAnimations.SlideToCenterSettingsPanel();
     }
 
     private void HideSettingsPanel()
     {
-        SettingsPanel.SetActive(false);
+        MenuAnimations.SlideToStartPositionSettingsPanel(SettingsPanel);
     }
 
 }
